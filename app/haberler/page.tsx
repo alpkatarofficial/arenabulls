@@ -83,6 +83,7 @@ export default function HaberlerPage() {
   }
 
   return (
+    <>
     <div className="min-h-screen bg-black">
       <Navbar />
 
@@ -194,6 +195,7 @@ export default function HaberlerPage() {
 
       <Footer />
     </div>
+      </>
   )
 }
 
@@ -209,6 +211,7 @@ function FeaturedNewsCard({ news }: { news: NewsItem }) {
   }
 
   return (
+    <>
     <article className="news-card bg-[#141414] rounded-xl overflow-hidden border border-gray-800 hover:border-[#0099ff] transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-[#0099ff]/10 group">
       <div className="relative h-64 overflow-hidden">
         <Image
@@ -257,6 +260,7 @@ function FeaturedNewsCard({ news }: { news: NewsItem }) {
         </Link>
       </div>
     </article>
+    </>
   )
 }
 
@@ -272,6 +276,7 @@ function NewsCard({ news }: { news: NewsItem }) {
   }
 
   return (
+    <>
     <article className="news-card bg-[#141414] rounded-xl overflow-hidden border border-gray-800 hover:border-[#0099ff] transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-[#0099ff]/10 group h-full">
       <div className="relative h-48 overflow-hidden">
         <Image
@@ -320,5 +325,6 @@ function NewsCard({ news }: { news: NewsItem }) {
         </Link>
       </div>
     </article>
+    </>
   )
 }
