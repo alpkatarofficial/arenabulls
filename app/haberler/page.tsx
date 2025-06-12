@@ -10,10 +10,10 @@ import { Badge } from "@/components/ui/badge"
 import { Calendar, User, ArrowRight, Filter } from "lucide-react"
 import { getAllNews, getCategoryLabel, getCategoryColor, type NewsItem } from "@/lib/news"
 
+type CategoryKey = "all" | "duyuru" | "sponsorluk" | "transfer" | "etkinlik" | "haber"
+
 export default function HaberlerPage() {
-  const [selectedCategory, setSelectedCategory] = useState<
-    "all" | "duyuru" | "sponsorluk" | "transfer" | "etkinlik" | "haber"
-  >("all")
+  const [selectedCategory, setSelectedCategory] = useState<CategoryKey>("all")
   const [allNews, setAllNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -83,7 +83,6 @@ export default function HaberlerPage() {
   }
 
   return (
-    <>
     <div className="min-h-screen bg-black">
       <Navbar />
 
@@ -128,12 +127,12 @@ export default function HaberlerPage() {
               {categories.map((category) => (
                 <button
                   key={category.key}
-                  onClick={() => setSelectedCategory(category.key as any)}
-                  className={px-4 py-2 rounded-full font-medium transition-all duration-300 ${
+                  onClick={() => setSelectedCategory(category.key as CategoryKey)}
+                  className={`px-4 py-2 rounded-full font-medium transition-all duration-300 ${
                     selectedCategory === category.key
                       ? "bg-[#0099ff] text-white shadow-lg shadow-[#0099ff]/30"
                       : "bg-black/50 text-gray-400 hover:text-white hover:bg-gray-800 border border-gray-700"
-                  }}
+                  }`}
                 >
                   {category.label} ({category.count})
                 </button>
@@ -195,11 +194,9 @@ export default function HaberlerPage() {
 
       <Footer />
     </div>
-      </>
   )
 }
 
-// Featured News Card Component (Larger)
 function FeaturedNewsCard({ news }: { news: NewsItem }) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -211,7 +208,6 @@ function FeaturedNewsCard({ news }: { news: NewsItem }) {
   }
 
   return (
-    <>
     <article className="news-card bg-[#141414] rounded-xl overflow-hidden border border-gray-800 hover:border-[#0099ff] transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-[#0099ff]/10 group">
       <div className="relative h-64 overflow-hidden">
         <Image
@@ -223,7 +219,7 @@ function FeaturedNewsCard({ news }: { news: NewsItem }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
         <div className="absolute top-4 left-4">
-          <Badge className={${getCategoryColor(news.category)} text-white font-medium px-3 py-1}>
+          <Badge className={`${getCategoryColor(news.category)} text-white font-medium px-3 py-1`}>
             {getCategoryLabel(news.category)}
           </Badge>
         </div>
@@ -249,7 +245,7 @@ function FeaturedNewsCard({ news }: { news: NewsItem }) {
 
         <p className="text-gray-400 mb-4 line-clamp-3">{news.excerpt}</p>
 
-        <Link href={/haberler/${news.slug}}>
+        <Link href={`/haberler/${news.slug}`}>
           <Button
             variant="outline"
             className="w-full border-[#0099ff] text-[#0099ff] hover:bg-[#0099ff] hover:text-white transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#0099ff]/20"
@@ -260,11 +256,9 @@ function FeaturedNewsCard({ news }: { news: NewsItem }) {
         </Link>
       </div>
     </article>
-    </>
   )
 }
 
-// Regular News Card Component
 function NewsCard({ news }: { news: NewsItem }) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -276,7 +270,6 @@ function NewsCard({ news }: { news: NewsItem }) {
   }
 
   return (
-    <>
     <article className="news-card bg-[#141414] rounded-xl overflow-hidden border border-gray-800 hover:border-[#0099ff] transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-[#0099ff]/10 group h-full">
       <div className="relative h-48 overflow-hidden">
         <Image
@@ -288,7 +281,7 @@ function NewsCard({ news }: { news: NewsItem }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
         <div className="absolute top-4 left-4">
-          <Badge className={${getCategoryColor(news.category)} text-white font-medium px-3 py-1 text-xs}>
+          <Badge className={`${getCategoryColor(news.category)} text-white font-medium px-3 py-1 text-xs`}>
             {getCategoryLabel(news.category)}
           </Badge>
         </div>
@@ -314,7 +307,7 @@ function NewsCard({ news }: { news: NewsItem }) {
 
         <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">{news.excerpt}</p>
 
-        <Link href={/haberler/${news.slug}} className="mt-auto">
+        <Link href={`/haberler/${news.slug}`} className="mt-auto">
           <Button
             variant="outline"
             className="w-full border-[#0099ff] text-[#0099ff] hover:bg-[#0099ff] hover:text-white transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#0099ff]/20"
@@ -325,6 +318,5 @@ function NewsCard({ news }: { news: NewsItem }) {
         </Link>
       </div>
     </article>
-    </>
   )
 }
