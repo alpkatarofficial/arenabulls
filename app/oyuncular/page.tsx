@@ -1,4 +1,4 @@
-import { PlayerCard } from "@/components/players";
+import { PlayerCard } from "@/components/players/card"
 
 export default function PlayersPage() {
   const players = [
